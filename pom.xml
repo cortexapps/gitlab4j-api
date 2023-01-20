@@ -52,10 +52,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<jersey.version>2.30.1</jersey.version>
-		<jackson.version>2.10.3</jackson.version>
-		<servlet.version>4.0.3</servlet.version>
-		<activation.version>1.2.2</activation.version>
+		<jersey.version>3.0.4</jersey.version>
+		<jackson.version>2.13.2.2</jackson.version>
+		<servlet.version>9.1.0</servlet.version>
+		<activation.version>2.0.1</activation.version>
 
 		<junit.version>5.6.0</junit.version>
 		<mockito.version>3.3.0</mockito.version>
@@ -427,8 +427,8 @@
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>jakarta.servlet</groupId>
-			<artifactId>jakarta.servlet-api</artifactId>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
 			<version>${servlet.version}</version>
 		</dependency>
 

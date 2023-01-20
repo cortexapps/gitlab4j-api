@@ -1,16 +1,15 @@
 package org.gitlab4j.api;
 
+import jakarta.ws.rs.core.Form;
+import jakarta.ws.rs.core.MultivaluedHashMap;
+import org.gitlab4j.api.models.AccessLevel;
+import org.gitlab4j.api.models.Variable;
+import org.gitlab4j.api.utils.ISO8601;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MultivaluedHashMap;
-
-import org.gitlab4j.api.models.AccessLevel;
-import org.gitlab4j.api.models.Variable;
-import org.gitlab4j.api.utils.ISO8601;
 
 /**
  * This class extends the standard JAX-RS Form class to make it fluent.
@@ -39,7 +38,7 @@ public class GitLabApiForm extends Form {
 
     /**
      * Fluent method for adding query and form parameters to a get() or post() call.
-     * 
+     *
      * @param name the name of the field/attribute to add
      * @param value the value of the field/attribute to add
      * @return this GitLabAPiForm instance

@@ -9,7 +9,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.Collections;
 
-import javax.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.MultivaluedMap;
 
 import org.gitlab4j.api.models.MergeRequest;
 import org.junit.Before;
