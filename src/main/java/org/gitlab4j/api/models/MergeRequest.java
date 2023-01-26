@@ -23,6 +23,7 @@ public class MergeRequest {
     private Participant closedBy;
     private Date createdAt;
     private String description;
+    private String detailedMergeStatus;
     private Boolean discussionLocked;
     private Integer divergedCommitsCount;
     private Integer downvotes;
@@ -166,6 +167,14 @@ public class MergeRequest {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDetailedMergeStatus() {
+        return detailedMergeStatus;
+    }
+
+    public void setDetailedMergeStatus(String detailedMergeStatus) {
+        this.detailedMergeStatus = detailedMergeStatus;
     }
 
     public Boolean getDiscussionLocked() {
