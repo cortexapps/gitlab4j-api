@@ -224,7 +224,9 @@ public class MergeRequestApi extends AbstractApi {
         Form formData = new GitLabApiForm()
                 .withParam("state", state)
                 .withParam(PAGE_PARAM, page)
-                .withParam(PER_PAGE_PARAM, perPage);
+                .withParam(PER_PAGE_PARAM, perPage)
+                // https://gitlab.com/gitlab-org/gitlab/-/merge_requests/31890
+                .withParam("with_merge_status_recheck", true);
         Response response = get(Response.Status.OK, formData.asMap(), "projects", getProjectIdOrPath(projectIdOrPath), "merge_requests");
         return (response.readEntity(new GenericType<List<MergeRequest>>() {}));
     }
