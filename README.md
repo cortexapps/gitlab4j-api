@@ -9,6 +9,7 @@ GitLab4J&trade; API (gitlab4j-api) provides a full featured and easy to consume 
 
 ---
 ## Table of Contents
+* [(Cortex) Publishing](#cortex-publishing)<br />
 * [GitLab Server Version Support](#gitLab-server-version-support)<br/>
 * [Using GitLab4J-API](#using-gitlab4j-api)<br/>
   * [Java 8 Requirement](#java-8-requirement)<br/>
@@ -27,6 +28,13 @@ GitLab4J&trade; API (gitlab4j-api) provides a full featured and easy to consume 
   * [Issue Time Estimates](#issue-time-estimates)<br/>
 * [Making API Calls](#making-api-calls)<br/>
   * [Available Sub APIs](#available-sub-apis)
+
+---
+## (Cortex) Publishing
+You can run the following command to trigger a local publish:
+```
+./mvnw install -Dmaven.test.skip -Dspotless.check.skip=true -Dgpg.skip -Dmaven.javadoc.skip=true -Djacoco.skip=true -Dspotbugs.skip
+```
 
 ---
 ## GitLab Server Version Support

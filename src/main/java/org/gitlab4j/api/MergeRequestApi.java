@@ -118,6 +118,29 @@ public class MergeRequestApi extends AbstractApi {
     }
 
     /**
+     * Get all merge requests for the specified group.
+     *
+     * <pre><code>GitLab Endpoint: GET /groups/:id/merge_requests</code></pre>
+     *
+     * @param groupIdOrPath the group in the form of an Long(ID), String(path), or Group instance
+     * @param state the state parameter can be used to get only merge requests with a given state (opened, closed, or merged) or all of them (all).
+     * @param page the page to get
+     * @param perPage the number of MergeRequest instances per page
+     * @return all merge requests for the specified group
+     * @throws GitLabApiException if any exception occurs
+     */
+    public List<MergeRequest> getMergeRequestsForGroup(Object groupIdOrPath, MergeRequestState state, int page, int perPage) throws GitLabApiException {
+        Form formData = new GitLabApiForm()
+            .withParam("state", state)
+            .withParam(PAGE_PARAM, page)
+            .withParam(PER_PAGE_PARAM, perPage)
+            // https://gitlab.com/gitlab-org/gitlab/-/merge_requests/31890
+            .withParam("with_merge_status_recheck", true);
+        Response response = get(Response.Status.OK, formData.asMap(), "groups", getGroupIdOrPath(groupIdOrPath), "merge_requests");
+        return (response.readEntity(new GenericType<List<MergeRequest>>() {}));
+    }
+
+    /**
      * Get all merge requests for the specified project.
      *
      * <pre><code>GitLab Endpoint: GET /projects/:id/merge_requests</code></pre>
@@ -944,7 +967,7 @@ public class MergeRequestApi extends AbstractApi {
      * @return a ApprovalRule instance with approval configuration
      * @throws GitLabApiException if any exception occurs
      */
-    public ApprovalRule createApprovalRule(Object projectIdOrPath, Integer mergeRequestIid, 
+    public ApprovalRule createApprovalRule(Object projectIdOrPath, Integer mergeRequestIid,
 	    Integer projectRuleId, ApprovalRuleParams params) throws GitLabApiException {
 
         if (mergeRequestIid == null) {
@@ -1180,7 +1203,7 @@ public class MergeRequestApi extends AbstractApi {
      * @throws GitLabApiException if any exception occurs
      */
     public Pager<Issue> getClosesIssues(Object projectIdOrPath, Integer mergeRequestIid, int itemsPerPage) throws GitLabApiException {
-        return new Pager<Issue>(this, Issue.class, itemsPerPage, null, 
+        return new Pager<Issue>(this, Issue.class, itemsPerPage, null,
                 "projects", getProjectIdOrPath(projectIdOrPath), "merge_requests", mergeRequestIid, "closes_issues");
     }
 
