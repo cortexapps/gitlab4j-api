@@ -9,9 +9,9 @@ import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.Constants.TokenType;
 import org.gitlab4j.api.models.OauthTokenResponse;
@@ -469,7 +469,7 @@ public class GitLabApi implements AutoCloseable {
     }
 
     /**
-     * Close the underlying {@link javax.ws.rs.client.Client} and its associated resources.
+     * Close the underlying {@link jakarta.ws.rs.client.Client} and its associated resources.
      */
     @Override
     public void close() {
@@ -1475,7 +1475,7 @@ public class GitLabApi implements AutoCloseable {
 
         return releaseLinksApi;
     }
-    
+
     /**
      * Gets the ReleasesApi instance owned by this GitLabApi instance. The ReleasesApi is used
      * to perform all release related API calls.
