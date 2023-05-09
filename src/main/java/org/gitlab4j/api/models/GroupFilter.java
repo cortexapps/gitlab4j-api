@@ -7,7 +7,7 @@ import org.gitlab4j.api.Constants.SortOrder;
 import org.gitlab4j.api.GitLabApiForm;
 
 /**
- *  This class is used to filter Projects when getting lists of projects for a specified group.
+ *  This class is used to filter Groups when getting lists of groups.
  */
 public class GroupFilter {
 
@@ -37,10 +37,10 @@ public class GroupFilter {
      * Show all the groups you have access to (defaults to false for authenticated users, true for admin).
      * Attributes owned and min_access_level have precedence
      *
-     * @param allAvailable if true show all avauilable groups
+     * @param allAvailable if true show all available groups
      * @return the reference to this GroupFilter instance
      */
-    public GroupFilter withAllAvailabley(Boolean allAvailable) {
+    public GroupFilter withAllAvailable(Boolean allAvailable) {
         this.allAvailable = allAvailable;
         return (this);
     }

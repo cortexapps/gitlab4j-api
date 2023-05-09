@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.models.Release;
 import org.gitlab4j.api.models.ReleaseParams;
@@ -136,7 +136,7 @@ public class ReleasesApi extends AbstractApi {
      *
      * <pre><code>GitLab Endpoint: DELETE /projects/:id/releases/:tag_name</code></pre>
      *
-     * @param projectIdOrPath the project in the form of an Integer(ID), String(path), or Project instance
+     * @param projectIdOrPath the project in the form of an Long(ID), String(path), or Project instance
      * @param tagName the tag name that the release was created from
      * @throws GitLabApiException if any exception occurs
      */

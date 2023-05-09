@@ -1,9 +1,8 @@
 # GitLab4J&trade; API (gitlab4j-api)<br />Java Client Library for the GitLab REST API
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.gitlab4j/gitlab4j-api.svg)](http://mvnrepository.com/artifact/org.gitlab4j/gitlab4j-api)
-[![Build Status](https://travis-ci.org/gitlab4j/gitlab4j-api.svg?branch=master)](https://travis-ci.org/gitlab4j/gitlab4j-api)
+[![Build Status](https://github.com/gitlab4j/gitlab4j-api/actions/workflows/ci-build.yml/badge.svg?branch=6.x)](https://github.com/gitlab4j/gitlab4j-api/actions/workflows/ci-build.yml)
 [![javadoc.io](https://javadoc.io/badge2/org.gitlab4j/gitlab4j-api/javadoc.io.svg)](https://javadoc.io/doc/org.gitlab4j/gitlab4j-api)
-
 
 GitLab4J&trade; API (gitlab4j-api) provides a full featured and easy to consume Java library for working with GitLab repositories via the GitLab REST API.  Additionally, full support for working with GitLab webhooks and system hooks is also provided.
 
@@ -12,7 +11,7 @@ GitLab4J&trade; API (gitlab4j-api) provides a full featured and easy to consume 
 * [(Cortex) Publishing](#cortex-publishing)<br />
 * [GitLab Server Version Support](#gitLab-server-version-support)<br/>
 * [Using GitLab4J-API](#using-gitlab4j-api)<br/>
-  * [Java 8 Requirement](#java-8-requirement)<br/>
+  * [Java 11 Requirement](#java-11-requirement)<br/>
   * [Javadocs](#javadocs)<br/>
   * [Project Set Up](#project-set-up)<br/>
   * [Usage Examples](#usage-examples)<br/>
@@ -49,8 +48,8 @@ As of GitLab 11.0 support for the GitLab API v3 has been removed from the GitLab
 ---
 ## Using GitLab4J-API
 
-### **Java 8 Requirement**
-As of GitLab4J-API 4.8.0, Java 8+ is now required to use GitLab4J-API.
+### **Java 11 Requirement**
+As of GitLab4J-API 6.0.0, Java 11+ is now required to use GitLab4J-API.
 
 ### **Javadocs**
 Javadocs are available here: [![javadoc.io](https://javadoc.io/badge2/org.gitlab4j/gitlab4j-api/javadoc.io.svg)](https://javadoc.io/doc/org.gitlab4j/gitlab4j-api)
@@ -62,7 +61,7 @@ To utilize GitLab4J&trade; API in your Java project, simply add the following de
 ```java
 dependencies {
     ...
-    compile group: 'org.gitlab4j', name: 'gitlab4j-api', version: '4.19.0'
+    compile group: 'org.gitlab4j', name: 'gitlab4j-api', version: '6.0.0-rc.1'
 }
 ```
 
@@ -73,7 +72,7 @@ dependencies {
 <dependency>
     <groupId>org.gitlab4j</groupId>
     <artifactId>gitlab4j-api</artifactId>
-    <version>4.19.0</version>
+    <version>6.0.0-rc.1</version>
 </dependency>
 ```
 
@@ -183,10 +182,10 @@ GitLab4J-API provides an easy to use paging mechanism to page through lists of r
 Here are a couple of examples on how to use the Pager:
 ```java
 // Get a Pager instance that will page through the projects with 10 projects per page
-Pager<Project> projectPager = gitlabApi.getProjectsApi().getProjects(10);
+Pager<Project> projectPager = gitLabApi.getProjectApi().getProjects(10);
 
 // Iterate through the pages and print out the name and description
-while (projectsPager.hasNext())) {
+while (projectPager.hasNext()) {
     for (Project project : projectPager.next()) {
         System.out.println(project.getName() + " -: " + project.getDescription());
     }

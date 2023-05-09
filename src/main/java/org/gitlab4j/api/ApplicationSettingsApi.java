@@ -3,7 +3,7 @@ package org.gitlab4j.api;
 import java.text.ParseException;
 import java.util.Iterator;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.models.Setting;
 import org.gitlab4j.api.models.ApplicationSettings;
@@ -37,7 +37,7 @@ public class ApplicationSettingsApi extends AbstractApi {
     }
 
     /**
-     * Update the application settings of the GitLab instance with the settings in the 
+     * Update the application settings of the GitLab instance with the settings in the
      * provided ApplicationSettings instance.
      *
      * <pre><code>GitLab Endpoint: PUT /api/v4/application/settings</code></pre>
@@ -117,7 +117,7 @@ public class ApplicationSettingsApi extends AbstractApi {
             String fieldName = fieldNames.next();
             switch (fieldName) {
             case "id":
-                appSettings.setId(root.path(fieldName).asInt());
+                appSettings.setId(root.path(fieldName).asLong());
                 break;
 
             case "created_at":

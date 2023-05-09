@@ -9,71 +9,76 @@ import org.gitlab4j.api.models.Duration;
 import org.gitlab4j.api.utils.JacksonJson;
 
 public class EventMergeRequest {
-    
-    private Integer assigneeId;
-    private Integer authorId;
+
+    private Long assigneeId;
+    private Long authorId;
     private String branchName;
     private Date createdAt;
     private String description;
-    private Integer id;
-    private Integer iid;
+    private Long id;
+    private Long iid;
     private String mergeCommitSha;
     private String mergeStatus;
-    private Integer milestoneId;
+    private String detailedMergeStatus;
+    private Long milestoneId;
     private Integer position;
     private Date lockedAt;
-    private Integer projectId;
+    private Long projectId;
     private String sourceBranch;
-    private Integer sourceProjectId;
+    private Long sourceProjectId;
     private String stCommits;
     private String stDiffs;
     private String state;
     private String targetBranch;
-    private Integer targetProjectId;
+    private Long targetProjectId;
     private String title;
     private Date updatedAt;
 
     private EventProject source;
     private EventProject target;
     private EventCommit lastCommit;
+    private Boolean blockingDiscussionsResolved;
     private Boolean workInProgress;
+    private Boolean firstContribution;
     private String url;
+    private List<EventLabel> labels;
     private String action;
     private Assignee assignee;
 
-    private Integer updatedById;
+    private Long updatedById;
     private String mergeError;
     private Map<String, String> mergeParams;
     private Boolean mergeWhenPipelineSucceeds;
-    private Integer mergeUserId;
+    private Long mergeUserId;
     private Date deletedAt;
     private String inProgressMergeCommitSha;
     private Integer lockVersion;
 
     private Date last_editedAt;
-    private Integer lastEditedById;
-    private Integer headPipelineId;
+    private Long lastEditedById;
+    private Long headPipelineId;
     private Boolean refFetched;
-    private Integer mergeIid;
+    private Long mergeIid;
     private Integer totalTimeSpent;
     private Duration humanTotalTimeSpent;
     private Integer timeEstimate;
     private Duration humanTimeEstimate;
-    private List<Integer> assigneeIds;
+    private List<Long> assigneeIds;
+    private List<Long> reviewerIds;
 
-    public Integer getAssigneeId() {
+    public Long getAssigneeId() {
         return this.assigneeId;
     }
 
-    public void setAssigneeId(Integer assigneeId) {
+    public void setAssigneeId(Long assigneeId) {
         this.assigneeId = assigneeId;
     }
 
-    public Integer getAuthorId() {
+    public Long getAuthorId() {
         return this.authorId;
     }
 
-    public void setAuthorId(Integer authorId) {
+    public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
 
@@ -101,19 +106,19 @@ public class EventMergeRequest {
         this.description = description;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getIid() {
+    public Long getIid() {
         return this.iid;
     }
 
-    public void setIid(Integer iid) {
+    public void setIid(Long iid) {
         this.iid = iid;
     }
 
@@ -133,11 +138,19 @@ public class EventMergeRequest {
         this.mergeStatus = mergeStatus;
     }
 
-    public Integer getMilestoneId() {
+    public String getDetailedMergeStatus() {
+        return detailedMergeStatus;
+    }
+
+    public void setDetailedMergeStatus(String detailedMergeStatus) {
+        this.detailedMergeStatus = detailedMergeStatus;
+    }
+
+    public Long getMilestoneId() {
         return this.milestoneId;
     }
 
-    public void setMilestoneId(Integer milestoneId) {
+    public void setMilestoneId(Long milestoneId) {
         this.milestoneId = milestoneId;
     }
 
@@ -157,11 +170,11 @@ public class EventMergeRequest {
         this.lockedAt = lockedAt;
     }
 
-    public Integer getProjectId() {
+    public Long getProjectId() {
         return this.projectId;
     }
 
-    public void setProjectId(Integer projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 
@@ -173,11 +186,11 @@ public class EventMergeRequest {
         this.sourceBranch = sourceBranch;
     }
 
-    public Integer getSourceProjectId() {
+    public Long getSourceProjectId() {
         return this.sourceProjectId;
     }
 
-    public void setSourceProjectId(Integer sourceProjectId) {
+    public void setSourceProjectId(Long sourceProjectId) {
         this.sourceProjectId = sourceProjectId;
     }
 
@@ -213,11 +226,11 @@ public class EventMergeRequest {
         this.targetBranch = targetBranch;
     }
 
-    public Integer getTargetProjectId() {
+    public Long getTargetProjectId() {
         return this.targetProjectId;
     }
 
-    public void setTargetProjectId(Integer targetProjectId) {
+    public void setTargetProjectId(Long targetProjectId) {
         this.targetProjectId = targetProjectId;
     }
 
@@ -261,6 +274,14 @@ public class EventMergeRequest {
         this.lastCommit = lastCommit;
     }
 
+    public Boolean getBlockingDiscussionsResolved() {
+        return blockingDiscussionsResolved;
+    }
+
+    public void setBlockingDiscussionsResolved(Boolean blockingDiscussionsResolved) {
+        this.blockingDiscussionsResolved = blockingDiscussionsResolved;
+    }
+
     public Boolean getWorkInProgress() {
         return workInProgress;
     }
@@ -269,12 +290,28 @@ public class EventMergeRequest {
         this.workInProgress = workInProgress;
     }
 
+    public Boolean getFirstContribution() {
+        return firstContribution;
+    }
+
+    public void setFirstContribution(Boolean firstContribution) {
+        this.firstContribution = firstContribution;
+    }
+
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public List<EventLabel> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<EventLabel> labels) {
+        this.labels = labels;
     }
 
     public String getAction() {
@@ -293,11 +330,11 @@ public class EventMergeRequest {
         this.assignee = assignee;
     }
 
-    public Integer getUpdatedById() {
+    public Long getUpdatedById() {
         return updatedById;
     }
 
-    public void setUpdatedById(Integer updatedById) {
+    public void setUpdatedById(Long updatedById) {
         this.updatedById = updatedById;
     }
 
@@ -325,11 +362,11 @@ public class EventMergeRequest {
         this.mergeWhenPipelineSucceeds = mergeWhenPipelineSucceeds;
     }
 
-    public Integer getMergeUserId() {
+    public Long getMergeUserId() {
         return mergeUserId;
     }
 
-    public void setMergeUserId(Integer mergeUserId) {
+    public void setMergeUserId(Long mergeUserId) {
         this.mergeUserId = mergeUserId;
     }
 
@@ -365,19 +402,19 @@ public class EventMergeRequest {
         this.last_editedAt = last_editedAt;
     }
 
-    public Integer getLastEditedById() {
+    public Long getLastEditedById() {
         return lastEditedById;
     }
 
-    public void setLastEditedById(Integer lastEditedById) {
+    public void setLastEditedById(Long lastEditedById) {
         this.lastEditedById = lastEditedById;
     }
 
-    public Integer getHeadPipelineId() {
+    public Long getHeadPipelineId() {
         return headPipelineId;
     }
 
-    public void setHeadPipelineId(Integer headPipelineId) {
+    public void setHeadPipelineId(Long headPipelineId) {
         this.headPipelineId = headPipelineId;
     }
 
@@ -389,11 +426,11 @@ public class EventMergeRequest {
         this.refFetched = refFetched;
     }
 
-    public Integer getMergeIid() {
+    public Long getMergeIid() {
         return mergeIid;
     }
 
-    public void setMergeIid(Integer mergeIid) {
+    public void setMergeIid(Long mergeIid) {
         this.mergeIid = mergeIid;
     }
 
@@ -429,12 +466,20 @@ public class EventMergeRequest {
         this.humanTimeEstimate = humanTimeEstimate;
     }
 
-    public List<Integer> getAssigneeIds() {
+    public List<Long> getAssigneeIds() {
         return assigneeIds;
     }
 
-    public void setAssigneeIds(List<Integer> assigneeIds) {
+    public void setAssigneeIds(List<Long> assigneeIds) {
         this.assigneeIds = assigneeIds;
+    }
+
+    public List<Long> getReviewerIds() {
+        return reviewerIds;
+    }
+
+    public void setReviewerIds(List<Long> reviewerIds) {
+        this.reviewerIds = reviewerIds;
     }
 
     @Override
