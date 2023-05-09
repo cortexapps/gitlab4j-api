@@ -5,7 +5,7 @@
 	<groupId>org.gitlab4j</groupId>
 	<artifactId>gitlab4j-api-cortex</artifactId>
 	<packaging>jar</packaging>
-	<version>6.0.0-rc.1</version>
+	<version>6.0.0</version>
 	<name>GitLab4J-API - GitLab API Java Client</name>
 	<description>GitLab4J-API (gitlab4j-api) provides a full featured Java client library for working with GitLab repositories and servers via the GitLab REST API.</description>
 	<url>https://github.com/gitlab4j/gitlab4j-api</url>
@@ -395,7 +395,7 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
-			<version>3.15.3.Final</version>
+			<version>6.2.3.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>net.ltgt.jaxrs</groupId>
