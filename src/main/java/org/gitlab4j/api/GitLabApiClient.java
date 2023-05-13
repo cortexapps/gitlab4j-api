@@ -20,16 +20,16 @@ import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509ExtendedTrustManager;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Form;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.StreamingOutput;
 import org.gitlab4j.api.Constants.TokenType;
 import org.gitlab4j.api.GitLabApi.ApiVersion;
 import org.gitlab4j.api.utils.JacksonJson;
@@ -68,7 +68,7 @@ public class GitLabApiClient implements AutoCloseable {
     private boolean ignoreCertificateErrors;
     private SSLContext openSslContext;
     private HostnameVerifier openHostnameVerifier;
-    private Integer sudoAsId;
+    private Long sudoAsId;
     private Integer connectTimeout;
     private Integer readTimeout;
 
@@ -287,8 +287,8 @@ public class GitLabApiClient implements AutoCloseable {
      * @param readTimeout the per request read timeout in milliseconds, can be null to use default
      */
     void setRequestTimeout(Integer connectTimeout, Integer readTimeout) {
-	this.connectTimeout = connectTimeout;
-	this.readTimeout = readTimeout;
+        this.connectTimeout = connectTimeout;
+        this.readTimeout = readTimeout;
     }
 
     /**
@@ -322,7 +322,7 @@ public class GitLabApiClient implements AutoCloseable {
      * Set the ID of the user to sudo as.
      *
      */
-    Integer getSudoAsId() {
+    Long getSudoAsId() {
         return (sudoAsId);
     }
 
@@ -331,7 +331,7 @@ public class GitLabApiClient implements AutoCloseable {
      *
      * @param sudoAsId the ID of the user to sudo as
      */
-    void setSudoAsId(Integer sudoAsId) {
+    void setSudoAsId(Long sudoAsId) {
         this.sudoAsId = sudoAsId;
     }
 
@@ -468,6 +468,35 @@ public class GitLabApiClient implements AutoCloseable {
      */
     protected Response head(MultivaluedMap<String, String> queryParams, URL url) {
         return (invocation(url, queryParams).head());
+    }
+
+    /**
+     * Perform an HTTP PATCH call with the specified query parameters and path objects, returning
+     * a ClientResponse instance with the data returned from the endpoint.
+     *
+     * @param queryParams multivalue map of request parameters
+     * @param pathArgs variable list of arguments used to build the URI
+     * @return a ClientResponse instance with the data returned from the endpoint
+     * @throws IOException if an error occurs while constructing the URL
+     */
+    protected Response patch(MultivaluedMap<String, String> queryParams, Object... pathArgs) throws IOException {
+        URL url = getApiUrl(pathArgs);
+        return (patch(queryParams, url));
+    }
+
+    /**
+     * Perform an HTTP PATCH call with the specified query parameters and URL, returning
+     * a ClientResponse instance with the data returned from the endpoint.
+     *
+     * @param queryParams multivalue map of request parameters
+     * @param url the fully formed path to the GitLab API endpoint
+     * @return a ClientResponse instance with the data returned from the endpoint
+     */
+    protected Response patch(MultivaluedMap<String, String> queryParams, URL url) {
+        Entity<?> empty = Entity.text("");
+        // use "X-HTTP-Method-Override" header on POST to override to unsupported PATCH
+        return (invocation(url, queryParams)
+                .header("X-HTTP-Method-Override", "PATCH").post(empty));
     }
 
     /**
@@ -921,6 +950,7 @@ public class GitLabApiClient implements AutoCloseable {
 
         // Ignore differences between given hostname and certificate hostname
         HostnameVerifier hostnameVerifier = new HostnameVerifier() {
+            @Override
             public boolean verify(String hostname, SSLSession session) {
                 return true;
             }

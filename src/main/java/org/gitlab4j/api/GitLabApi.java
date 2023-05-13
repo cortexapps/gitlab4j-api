@@ -9,9 +9,9 @@ import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.Constants.TokenType;
 import org.gitlab4j.api.models.OauthTokenResponse;
@@ -65,6 +65,7 @@ public class GitLabApi implements AutoCloseable {
     private EnvironmentsApi environmentsApi;
     private EpicsApi epicsApi;
     private EventsApi eventsApi;
+    private ExternalStatusCheckApi externalStatusCheckApi;
     private GroupApi groupApi;
     private HealthCheckApi healthCheckApi;
     private ImportExportApi importExportApi;
@@ -83,6 +84,7 @@ public class GitLabApi implements AutoCloseable {
     private PipelineApi pipelineApi;
     private ProjectApi projectApi;
     private ProtectedBranchesApi protectedBranchesApi;
+	private ReleaseLinksApi releaseLinksApi;
     private ReleasesApi releasesApi;
     private RepositoryApi repositoryApi;
     private RepositoryFileApi repositoryFileApi;
@@ -98,6 +100,7 @@ public class GitLabApi implements AutoCloseable {
     private UserApi userApi;
     private VulnerabilityFindingsApi vulnerabilityFindingsApi;
     private WikisApi wikisApi;
+    private KeysApi keysApi;
 
     /**
      * Get the GitLab4J shared Logger instance.
@@ -450,7 +453,7 @@ public class GitLabApi implements AutoCloseable {
      */
     public final GitLabApi duplicate() {
 
-        Integer sudoUserId = this.getSudoAsId();
+        Long sudoUserId = this.getSudoAsId();
         GitLabApi gitLabApi = new GitLabApi(apiVersion, gitLabServerUrl,
                 getTokenType(), getAuthToken(), getSecretToken(), clientConfigProperties);
         if (sudoUserId != null) {
@@ -466,7 +469,7 @@ public class GitLabApi implements AutoCloseable {
     }
 
     /**
-     * Close the underlying {@link javax.ws.rs.client.Client} and its associated resources.
+     * Close the underlying {@link jakarta.ws.rs.client.Client} and its associated resources.
      */
     @Override
     public void close() {
@@ -672,7 +675,7 @@ public class GitLabApi implements AutoCloseable {
             throw new GitLabApiException("the specified username was not found");
         }
 
-        Integer sudoAsId = user.getId();
+        Long sudoAsId = user.getId();
         apiClient.setSudoAsId(sudoAsId);
     }
 
@@ -690,7 +693,7 @@ public class GitLabApi implements AutoCloseable {
      * @param sudoAsId the ID of the user to sudo as, null will turn off sudo
      * @throws GitLabApiException if any exception occurs
      */
-    public void setSudoAsId(Integer sudoAsId) throws GitLabApiException {
+    public void setSudoAsId(Long sudoAsId) throws GitLabApiException {
 
         if (sudoAsId == null) {
             apiClient.setSudoAsId(null);
@@ -711,7 +714,7 @@ public class GitLabApi implements AutoCloseable {
      *
      * @return the current sudo as ID, will return null if not in sudo mode
      */
-    public Integer getSudoAsId() {
+    public Long getSudoAsId() {
         return (apiClient.getSudoAsId());
     }
 
@@ -1099,6 +1102,26 @@ public class GitLabApi implements AutoCloseable {
     }
 
     /**
+     * Gets the ExternalStatusCheckApi instance owned by this GitLabApi instance. The ExternalStatusCheckApi is used
+     * to perform all the external status checks related API calls.
+     *
+     * @return the ExternalStatusCheckApi instance owned by this GitLabApi instance
+     */
+    public ExternalStatusCheckApi getExternalStatusCheckApi() {
+
+        if (externalStatusCheckApi == null) {
+            synchronized (this) {
+                if (externalStatusCheckApi == null) {
+                    externalStatusCheckApi = new ExternalStatusCheckApi(this);
+                }
+            }
+        }
+
+        return (externalStatusCheckApi);
+    }
+
+
+    /**
      * Gets the GroupApi instance owned by this GitLabApi instance. The GroupApi is used
      * to perform all group related API calls.
      *
@@ -1435,6 +1458,25 @@ public class GitLabApi implements AutoCloseable {
     }
 
     /**
+     * Gets the ReleaseLinksApi instance owned by this GitLabApi instance. The ReleaseLinksApi is used
+     * to perform all Release Links related API calls.
+     *
+     * @return the ReleaseLinksApi instance owned by this GitLabApi instance
+     */
+    public ReleaseLinksApi getReleaseLinksApi() {
+
+        if (releaseLinksApi == null) {
+            synchronized (this) {
+                if (releaseLinksApi == null) {
+                    releaseLinksApi = new ReleaseLinksApi(this);
+                }
+            }
+        }
+
+        return releaseLinksApi;
+    }
+
+    /**
      * Gets the ReleasesApi instance owned by this GitLabApi instance. The ReleasesApi is used
      * to perform all release related API calls.
      *
@@ -1711,6 +1753,21 @@ public class GitLabApi implements AutoCloseable {
 
         return wikisApi;
     }
+
+    /**
+     * Gets the KeysApi instance owned by this GitLabApi instance. The KeysApi is used to look up users by their ssh key signatures
+     *
+     * @return the KeysApi instance owned by this GitLabApi instance
+     */
+    public KeysApi getKeysAPI() {
+        synchronized (this) {
+            if (keysApi == null) {
+                keysApi = new KeysApi(this);
+            }
+        }
+        return keysApi;
+    }
+
 
     /**
      * Create and return an Optional instance associated with a GitLabApiException.

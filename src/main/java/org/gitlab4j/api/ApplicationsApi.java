@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.models.Application;
 
@@ -43,7 +43,7 @@ public class ApplicationsApi extends AbstractApi {
      * @throws GitLabApiException if any exception occurs
      */
     public List<Application> getApplications(int page, int perPage) throws GitLabApiException {
-        Response response = get(javax.ws.rs.core.Response.Status.OK, getPageQueryParams(page, perPage), "applications");
+        Response response = get(jakarta.ws.rs.core.Response.Status.OK, getPageQueryParams(page, perPage), "applications");
         return (response.readEntity(new GenericType<List<Application>>() {}));
     }
 
@@ -126,7 +126,7 @@ public class ApplicationsApi extends AbstractApi {
      * @param applicationId the ID of the OUAUTH Application to delete
      * @throws GitLabApiException if any exception occurs
      */
-    public void deleteApplication(Integer applicationId) throws GitLabApiException {
+    public void deleteApplication(Long applicationId) throws GitLabApiException {
         delete(Response.Status.NO_CONTENT, null, "applications", applicationId);
     }
 }

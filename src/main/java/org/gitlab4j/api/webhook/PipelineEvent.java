@@ -70,7 +70,7 @@ public class PipelineEvent extends AbstractEvent {
 
     public static class ObjectAttributes {
 
-        private Integer id;
+        private Long id;
         private String ref;
         private Boolean tag;
         private String sha;
@@ -81,13 +81,14 @@ public class PipelineEvent extends AbstractEvent {
         private Date createdAt;
         private Date finishedAt;
         private Integer duration;
+        private Float queuedDuration;
         private List<Variable> variables;
 
-        public Integer getId() {
+        public Long getId() {
             return id;
         }
 
-        public void setId(Integer id) {
+        public void setId(Long id) {
             this.id = id;
         }
 
@@ -169,6 +170,14 @@ public class PipelineEvent extends AbstractEvent {
 
         public void setDuration(Integer duration) {
             this.duration = duration;
+        }
+
+        public Float getQueuedDuration() {
+            return queuedDuration;
+        }
+
+        public void setQueuedDuration(Float queuedDuration) {
+            this.queuedDuration = queuedDuration;
         }
 
         public List<Variable> getVariables() {

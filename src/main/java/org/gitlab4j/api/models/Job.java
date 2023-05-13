@@ -7,7 +7,7 @@ import org.gitlab4j.api.utils.JacksonJson;
 
 public class Job {
 
-    private Integer id;
+    private Long id;
     private Commit commit;
     private String coverage;
     private Date createdAt;
@@ -29,13 +29,14 @@ public class Job {
     private Boolean manual;
     private Boolean allowFailure;
     private Float duration;
+    private Float queuedDuration;
     private Project project;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -206,16 +207,23 @@ public class Job {
     public void setDuration(Float duration) {
         this.duration = duration;
     }
-    
+
+    public Float getQueuedDuration() {
+        return queuedDuration;
+    }
+
+    public void setQueuedDuration(Float queuedDuration) {
+        this.queuedDuration = queuedDuration;
+    }
+
     public Project getProject() {
         return project;
     }
-    
     public void setProject(Project project) {
         this.project = project;
     }
 
-    public Job withId(Integer id) {
+    public Job withId(Long id) {
         this.id = id;
         return this;
     }
@@ -304,12 +312,16 @@ public class Job {
         this.allowFailure = allowFailure;
         return this;
     }
-    
     public Job withDuration(Float duration) {
         this.duration = duration;
         return this;
     }
-    
+
+    public Job withQueuedDuration(Float queuedDuration) {
+        this.queuedDuration = queuedDuration;
+        return this;
+    }
+
     public Job withProject(Project project) {
         this.project = project;
         return this;

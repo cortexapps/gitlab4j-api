@@ -7,8 +7,11 @@ import org.gitlab4j.api.utils.JacksonJson;
 
 public class Pipeline {
 
-    private Integer id;
+    private Long id;
+    private Long iid;
+    private Long projectId;
     private PipelineStatus status;
+    private String source;
     private String ref;
     private String sha;
     private String beforeSha;
@@ -22,15 +25,32 @@ public class Pipeline {
     private Date committedAt;
     private String coverage;
     private Integer duration;
+    private Float queuedDuration;
     private String webUrl;
     private DetailedStatus detailedStatus;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIid() {
+        return iid;
+    }
+
+    public void setIid(Long iid) {
+        this.iid = iid;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public PipelineStatus getStatus() {
@@ -39,6 +59,14 @@ public class Pipeline {
 
     public void setStatus(PipelineStatus status) {
         this.status = status;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getRef() {
@@ -130,26 +158,6 @@ public class Pipeline {
     }
 
     /**
-     * @deprecated Replaced by {@link #getUpdatedAt()}
-     * @return the updated at Date
-     */
-    @Deprecated
-    @JsonIgnore
-    public Date getUpdated_at() {
-        return updatedAt;
-    }
-
-    /**
-     * @deprecated Replaced by {@link #setUpdatedAt(Date)}
-     * @param updatedAt new updated at value
-     */
-    @Deprecated
-    @JsonIgnore
-    public void setUpdated_at(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    /**
      * @deprecated Replaced by {@link #getStartedAt()}
      * @return the started at Date
      */
@@ -157,56 +165,6 @@ public class Pipeline {
     @JsonIgnore
     public Date getStarted_at() {
         return startedAt;
-    }
-
-    /**
-     * @deprecated Replaced by {@link #setStartedAt(Date)}
-     * @param startedAt new started at value
-     */
-    @Deprecated
-    @JsonIgnore
-    public void setStarted_at(Date startedAt) {
-        this.startedAt = startedAt;
-    }
-
-    /**
-     * @deprecated Replaced by {@link #getFinishedAt()}
-     * @return the finished at Date
-     */
-    @Deprecated
-    @JsonIgnore
-    public Date getFinished_at() {
-        return finishedAt;
-    }
-
-    /**
-     * @deprecated Replaced by {@link #setFinishedAt(Date)}
-     * @param finishedAt new finished at value
-     */
-    @Deprecated
-    @JsonIgnore
-    public void setFinished_at(Date finishedAt) {
-        this.finishedAt = finishedAt;
-    }
-
-    /**
-     * @deprecated Replaced by {@link #getCommittedAt()}
-     * @return the committed at Date
-     */
-    @Deprecated
-    @JsonIgnore
-    public Date getCommitted_at() {
-        return committedAt;
-    }
-
-    /**
-     * @deprecated Replaced by {@link #setCommittedAt(Date)}
-     * @param committedAt new committed at value
-     */
-    @Deprecated
-    @JsonIgnore
-    public void setCommitted_at(Date committedAt) {
-        this.committedAt = committedAt;
     }
 
     public String getCoverage() {
@@ -223,6 +181,14 @@ public class Pipeline {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public Float getQueuedDuration() {
+        return queuedDuration;
+    }
+
+    public void setQueuedDuration(Float queuedDuration) {
+        this.queuedDuration = queuedDuration;
     }
 
     public String getWebUrl() {

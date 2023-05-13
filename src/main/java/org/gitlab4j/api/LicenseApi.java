@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.models.License;
 
@@ -20,7 +20,7 @@ public class LicenseApi extends AbstractApi {
 
     /**
      * Retrieve information about the current license.
-     * 
+     *
      * <pre><code>GitLab Endpoint: GET /license</code></pre>
      *
      * @return a License instance holding info about the current license
@@ -108,7 +108,7 @@ public class LicenseApi extends AbstractApi {
      * @return a License instance for the delete license
      * @throws GitLabApiException if any exception occurs
      */
-    public License deleteLicense(Integer licenseId) throws GitLabApiException {
+    public License deleteLicense(Long licenseId) throws GitLabApiException {
         Response response = delete(Response.Status.OK, null, "license", licenseId);
         return (response.readEntity(License.class));
     }

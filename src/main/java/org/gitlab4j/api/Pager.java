@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
 
 import org.gitlab4j.api.utils.JacksonJson;
 
@@ -72,7 +72,7 @@ public class Pager<T> implements Iterator<List<T>>, Constants {
      * @param pathArgs HTTP path arguments
      * @throws GitLabApiException if any error occurs
      */
-    Pager(AbstractApi api, Class<T> type, int itemsPerPage, MultivaluedMap<String, String> queryParams, Object... pathArgs) throws GitLabApiException {
+    public Pager(AbstractApi api, Class<T> type, int itemsPerPage, MultivaluedMap<String, String> queryParams, Object... pathArgs) throws GitLabApiException {
 
         javaType = mapper.getTypeFactory().constructCollectionType(List.class, type);
 
@@ -258,9 +258,8 @@ public class Pager<T> implements Iterator<List<T>>, Constants {
      * Returns the first page of List. Will rewind the iterator.
      *
      * @return the first page of List
-     * @throws GitLabApiException if any error occurs
      */
-    public List<T> first() throws GitLabApiException {
+    public List<T> first() {
         return (page(1));
     }
 
@@ -283,9 +282,8 @@ public class Pager<T> implements Iterator<List<T>>, Constants {
      * Returns the previous page of List. Will set the iterator to the previous page.
      *
      * @return the previous page of List
-     * @throws GitLabApiException if any error occurs
      */
-    public List<T> previous() throws GitLabApiException {
+    public List<T> previous() {
         return (page(currentPage - 1));
     }
 
@@ -293,9 +291,8 @@ public class Pager<T> implements Iterator<List<T>>, Constants {
      * Returns the current page of List.
      *
      * @return the current page of List
-     * @throws GitLabApiException if any error occurs
      */
-    public List<T> current() throws GitLabApiException {
+    public List<T> current() {
         return (page(currentPage));
     }
 
