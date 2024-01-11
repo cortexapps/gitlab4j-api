@@ -1,4 +1,4 @@
-name: GitLab4J CI
+name: Build
 
 on:
   push:
