@@ -71,6 +71,8 @@ public class MergeRequestApi extends AbstractApi {
             }
 
             response = get(Response.Status.OK, queryParams, "projects", filter.getProjectId(), "merge_requests");
+        } else if (filter != null && filter.getGroupId() != null && filter.getGroupId().intValue() > 0) {
+            response = get(Response.Status.OK, queryParams, "groups", filter.getGroupId(), "merge_requests");
         } else {
             response = get(Response.Status.OK, queryParams, "merge_requests");
         }
